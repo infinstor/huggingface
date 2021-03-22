@@ -18,6 +18,7 @@ def infin_transform_one_object(filename, output_dir, parentdir, **kwargs):
     for line in inf.readlines():
         print('infin_transform_one_object: read line=' + line, flush=True)
         s = nlp(line)[0]
+        print('infin_transform_one_object: finished nlp on line. result=' + str(s), flush=True)
         df.append({'text': line, 'sentiment_label': s['label'], 'sentiment_score': s['score']}, ignore_index=True)
         print('infin_transform_one_object: added line', flush=True)
 
