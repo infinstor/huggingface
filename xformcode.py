@@ -11,9 +11,12 @@ def infin_transform_one_object(filename, output_dir, parentdir, **kwargs):
     global nlp
 
     df = pd.DataFrame(columns=['text', 'sentiment_label', 'sentiment_score'])
+    print('infin_transform_one_object: finished creating empty dataframe', flush=True)
 
     inf = open(filename, 'r', errors='ignore')
+    print('infin_transform_one_object: finished opening input file for read', flush=True)
     for line in inf.readlines():
+        print('infin_transform_one_object: read line=' + line, flush=True)
         s = nlp(line)[0]
         df.append({'text': line, 'sentiment_label': s['label'], 'sentiment_score': s['score']}, ignore_index=True)
         print('infin_transform_one_object: added line', flush=True)
