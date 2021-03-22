@@ -23,7 +23,7 @@ def infin_transform_one_object(filename, output_dir, parentdir, **kwargs):
 
     df = pd.DataFrame(arr, columns=['text', 'sentiment_label', 'sentiment_score'])
     print('infin_transform_one_object: finished creating dataframe', flush=True)
-    df.to_json(filename + '.json')
+    df.to_json(filename + '.json', orient='records')
     print('infin_transform_one_object: finished writing to df to json. file=' + filename + '.json', flush=True)
     log_artifact(filename + '.json', parentdir)
     print('infin_transform_one_object: finished logging artifact', flush=True)
