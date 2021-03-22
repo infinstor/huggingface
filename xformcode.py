@@ -8,7 +8,6 @@ nlp = pipeline('sentiment-analysis')
 # This transform is called for each file in the chosen data
 def infin_transform_one_object(filename, output_dir, parentdir, **kwargs):
     print('infin_transform_one_object: Entered. filename=' + filename + ', output_dir=' + output_dir)
-    global nlp
 
     df = pd.DataFrame(columns=['text', 'sentiment_label', 'sentiment_score'])
     print('infin_transform_one_object: finished creating empty dataframe', flush=True)
@@ -18,6 +17,8 @@ def infin_transform_one_object(filename, output_dir, parentdir, **kwargs):
     for line in inf.readlines():
         print('infin_transform_one_object: read line=' + line, flush=True)
         try:
+            global nlp
+            print('nlp=' + str(nlp), flush=True)
             s = nlp(line)[0]
         except Exception as err:
             print(f'error occurred while nlp: {err}')
