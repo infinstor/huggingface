@@ -16,6 +16,9 @@ def infin_transform_one_object(filename, output_dir, parentdir, **kwargs):
     for line in inf.readlines():
         s = nlp(line)[0]
         df.append({'text': line, 'sentiment_label': s['label'], 'sentiment_score': s['score']}, ignore_index=True)
+        print('infin_transform_one_object: added line', flush=True)
 
     df.to_json(filename + '.json')
+    print('infin_transform_one_object: finished writing to json. file=' + filename + '.json', flush=True)
     log_artifact(filename + '.json', parentdir)
+    print('infin_transform_one_object: finished logging artifact', flush=True)
