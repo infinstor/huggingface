@@ -9,25 +9,21 @@ nlp = pipeline('sentiment-analysis')
 def infin_transform_one_object(filename, output_dir, parentdir, **kwargs):
     print('infin_transform_one_object: Entered. filename=' + filename + ', output_dir=' + output_dir)
 
-    df = pd.DataFrame(columns=['text', 'sentiment_label', 'sentiment_score'])
-    print('infin_transform_one_object: finished creating empty dataframe', flush=True)
-
+    arr = []
     inf = open(filename, 'r', errors='ignore')
-    print('infin_transform_one_object: finished opening input file for read', flush=True)
     for line in inf.readlines():
-        print('infin_transform_one_object: read line=' + line, flush=True)
+        one = []
         try:
             global nlp
-            print('nlp=' + str(nlp), flush=True)
             s = nlp(line)[0]
         except Exception as err:
             print(f'error occurred while nlp: {err}')
         else:
-            print('infin_transform_one_object: finished nlp on line. result=' + str(s), flush=True)
-        df.append({'text': line, 'sentiment_label': s['label'], 'sentiment_score': s['score']}, ignore_index=True)
-        print('infin_transform_one_object: added line', flush=True)
+            arr.append([line, s['label'], s['score']])
 
+    df = pd.DataFrame(arr, columns=['text', 'sentiment_label', 'sentiment_score'])
+    print('infin_transform_one_object: finished creating dataframe', flush=True)
     df.to_json(filename + '.json')
-    print('infin_transform_one_object: finished writing to json. file=' + filename + '.json', flush=True)
+    print('infin_transform_one_object: finished writing to df to json. file=' + filename + '.json', flush=True)
     log_artifact(filename + '.json', parentdir)
     print('infin_transform_one_object: finished logging artifact', flush=True)
