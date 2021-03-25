@@ -18,9 +18,9 @@ def do_nlp_fnx(row):
     global nlp
     try:
         if 'sequence' in row:
-            s = nlp(row['sequence'])
+            s = nlp(row['sequence'])[0]
         elif 'text' in row:
-            s = nlp(row['text'])
+            s = nlp(row['text'])[0]
         else:
             return '', ''
     except Exception as err:
