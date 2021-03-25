@@ -45,8 +45,6 @@ def infin_transform_one_object(filename, output_dir, parentdir, **kwargs):
     print('infin_transform_one_object: shape=' + str(df.shape), flush=True)
     cols = df.columns.values.tolist()
     print('infin_transform_one_object: columns = ' + str(cols), flush=True)
-    for index, rw in df.iterrows():
-        print('infin_transform_one_object: row = ' + str(rw), flush=True)
     print('infin_transform_one_object: finished creating dataframe', flush=True)
     df.to_json(filename + '.json', orient='records')
     print('infin_transform_one_object: finished writing df to json. file=' + filename + '.json', flush=True)
